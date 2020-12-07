@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Julia Hwang" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>Project 1: Exploratory Data Analysis</title>
+    <meta name="generator" content="Hugo 0.79.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../post/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../project/project1/">Project 1: Exploratory Data Analysis</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         January 1, 0001 
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+<link href="../../rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="../../rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="../../rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="../../rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="../../rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>0. Introduction</h2>
+<div id="the-datasets-i-will-be-using-for-this-project-come-from-three-sources-my-credit-card-statements-my-fitness-app-and-my-pdm-insulin-delivery-device.-i-am-computing-to-see-if-there-is-a-correlation-between-my-food-spending-habits-my-weight-and-how-much-insulin-i-am-using.-my-credit-card-data-contains-every-transaction-on-my-card-from-the-past-year.-the-data-from-my-health-app-has-my-tracked-my-daily-weight-and-my-insulin-data-has-my-daily-total-insulin-intake.-all-datasets-are-separated-by-date-and-span-over-the-past-year.-im-interested-to-see-if-there-is-a-specific-restauranttype-of-food-that-will-cause-me-to-increase-my-insulin-intake-and-how-strongly-correlated-insulin-usage-and-weight-are-with-each-other." class="section level4">
+<h4>The datasets I will be using for this project come from three sources: my credit card statements, my fitness app, and my PDM (insulin delivery device). I am computing to see if there is a correlation between my food spending habits, my weight, and how much insulin I am using. My credit card data contains every transaction on my card from the past year. The data from my health app has my tracked my daily weight and my insulin data has my daily total insulin intake. All datasets are separated by date and span over the past year. I'm interested to see if there is a specific restaurant/type of food that will cause me to increase my insulin intake, and how strongly correlated insulin usage and weight are with each other.</h4>
+</div>
+<div id="during-the-months-that-i-lived-in-austin-my-diet-mostly-consisted-of-starbucks-chick-fil-a-campus-food-and-boba-bubble-tea.-also-during-the-school-months-i-consistently-eat-out-with-friends-grab-dessert-and-generally-eat-unhealthier.-when-i-am-back-at-home-i-am-eating-mostly-home-cooked-meals-that-my-mother-provides-making-it-unnecessary-to-spend-money-on-fast-food-or-other-unhealthy-alternatives.-i-expect-my-weight-insulin-usage-and-spending-on-food-to-be-positively-correlated-with-each-other.-i-also-expect-that-insulin-usage-and-weight-will-be-directly-correlated-with-each-other-as-eating-more-food-generally-requires-more-insulin-intake.-lastly-i-expect-that-these-numbers-will-be-higher-during-the-school-months-compared-to-months-that-i-am-back-at-home-especially-since-quarantine-had-restricted-me-from-eating-out-with-friends." class="section level4">
+<h4>During the months that I lived in Austin my diet mostly consisted of Starbucks, Chick-fil-a, campus food, and boba (bubble tea). Also, during the school months I consistently eat out with friends, grab dessert, and generally eat unhealthier. When I am back at home, I am eating mostly home cooked meals that my mother provides, making it unnecessary to spend money on fast food or other unhealthy alternatives. I expect my weight, insulin usage, and spending on food to be positively correlated with each other. I also expect that insulin usage and weight will be directly correlated with each other, as eating more food generally requires more insulin intake. Lastly, I expect that these numbers will be higher during the school months compared to months that I am back at home, especially since quarantine had restricted me from eating out with friends.</h4>
+</div>
+</div>
+<div id="tidying-cleaning-and-rearranging-data" class="section level2">
+<h2>1. Tidying: Cleaning and Rearranging Data</h2>
+<pre class="r"><code>options(pillar.sigfig = 6)
+# using packages that will be needed
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(readxl)
+
+# read in all data sets
+January2020_0443 &lt;- read_csv(&quot;January2020_0443.csv&quot;)
+February2020_0443 &lt;- read_csv(&quot;February2020_0443.csv&quot;)
+March2020_0443 &lt;- read_csv(&quot;March2020_0443.csv&quot;)
+April2020_0443 &lt;- read_csv(&quot;April2020_0443.csv&quot;)
+May2020_0443 &lt;- read_csv(&quot;May2020_0443.csv&quot;)
+June2020_0443 &lt;- read_csv(&quot;June2020_0443.csv&quot;)
+July2020_0443 &lt;- read_csv(&quot;July2020_0443.csv&quot;)
+August2020_0443 &lt;- read_csv(&quot;August2020_0443.csv&quot;)
+September2020_0443 &lt;- read_csv(&quot;September2020_0443.csv&quot;)
+October2019_0443 &lt;- read_csv(&quot;October2019_0443.csv&quot;)
+November2019_0443 &lt;- read_csv(&quot;November2019_0443.csv&quot;)
+December2019_0443 &lt;- read_csv(&quot;December2019_0443.csv&quot;)
+FITINDEX_Jules &lt;- read_csv(&quot;FITINDEX-Jules.csv&quot;)
+total_insulin &lt;- read_excel(&quot;total insulin.xlsx&quot;)
+
+# compiling data from my credit card transactions
+originalmoneydata &lt;- rbind(January2020_0443, February2020_0443, 
+    March2020_0443, April2020_0443, May2020_0443, June2020_0443, 
+    July2020_0443, August2020_0443, September2020_0443, October2019_0443, 
+    November2019_0443, December2019_0443)
+moneydata &lt;- originalmoneydata %&gt;% separate(`Posted Date`, into = c(&quot;Month&quot;, 
+    &quot;Day&quot;, &quot;Year&quot;))
+# filtering out money that is added to my card
+moneydata &lt;- moneydata %&gt;% filter(Amount &lt; 0)
+# Changing food names into groups for better readability and
+# consistency
+moneydata$Payee[moneydata$Payee == &quot;STARBUCKS 800-782-7282 WA&quot; | 
+    moneydata$Payee == &quot;STARBUCKS 800-782-7282 800-782-7282 WA&quot;] &lt;- &quot;Starbucks&quot;
+moneydata$Payee[moneydata$Payee == &quot;ARAMARK SAC CFA AUSTIN TX&quot;] &lt;- &quot;CFA&quot;
+moneydata$Payee[moneydata$Payee == &quot;ARAMARK CHICK FIL A AUSTIN TX&quot;] &lt;- &quot;CFA&quot;
+moneydata$Payee[moneydata$Payee == &quot;UT H&amp;F FOOD SERVICE AUSTIN TX&quot;] &lt;- &quot;UT&quot;
+moneydata$Payee[moneydata$Payee == &quot;KFTEAUSA_31 AUSTIN TX&quot; | 
+    moneydata$Payee == &quot;SQ *TAPIOCA HOUSE. Austin TX&quot; | moneydata$Payee == 
+    &quot;CAFE MOZART BAKERY CARROLLTON TX&quot; | moneydata$Payee == &quot;GONG CHA. AUSTIN TX&quot; | 
+    moneydata$Payee == &quot;SQ *SQ *GONG CHA - DOB Austin TX&quot; | moneydata$Payee == 
+    &quot;7 LEAVES FRISCO FRISCO TX&quot; | moneydata$Payee == &quot;TST* FAT STRAWS 1 - PL PLANO TX&quot; | 
+    moneydata$Payee == &quot;SQ *SQ *THE NEST Frisco TX &quot; | moneydata$Payee == 
+    &quot;SQ *SQ *TAPIOCA HOUSE&quot; | moneydata$Payee == &quot;Austin TX BOBA LATTE FRISCO FRISCO TX&quot;] &lt;- &quot;Boba&quot;
+# selecting for top food places I&#39;ve spent the most money for
+moneydata &lt;- moneydata %&gt;% filter(Payee == &quot;Starbucks&quot; | Payee == 
+    &quot;CFA&quot; | Payee == &quot;UT&quot; | Payee == &quot;Boba&quot;)
+# tidying data; pivot to wide
+moneydata &lt;- moneydata %&gt;% pivot_wider(names_from = Payee, values_from = Amount)
+moneydata[is.na(moneydata)] = 0
+# replace month to names
+moneydata$Month[moneydata$Month == &quot;01&quot;] &lt;- &quot;Jan&quot;
+moneydata$Month[moneydata$Month == &quot;02&quot;] &lt;- &quot;Feb&quot;
+moneydata$Month[moneydata$Month == &quot;03&quot;] &lt;- &quot;Mar&quot;
+moneydata$Month[moneydata$Month == &quot;04&quot;] &lt;- &quot;Apr&quot;
+moneydata$Month[moneydata$Month == &quot;05&quot;] &lt;- &quot;May&quot;
+moneydata$Month[moneydata$Month == &quot;06&quot;] &lt;- &quot;Jun&quot;
+moneydata$Month[moneydata$Month == &quot;07&quot;] &lt;- &quot;Jul&quot;
+moneydata$Month[moneydata$Month == &quot;08&quot;] &lt;- &quot;Aug&quot;
+moneydata$Month[moneydata$Month == &quot;09&quot;] &lt;- &quot;Sep&quot;
+moneydata$Month[moneydata$Month == &quot;10&quot;] &lt;- &quot;Oct&quot;
+moneydata$Month[moneydata$Month == &quot;11&quot;] &lt;- &quot;Nov&quot;
+moneydata$Month[moneydata$Month == &quot;12&quot;] &lt;- &quot;Dec&quot;
+# total monthly spending on favorite foods into new dataframe
+moneyweek &lt;- moneydata %&gt;% select(Month, Day, Year, Starbucks, 
+    CFA, UT, Boba)
+# mutate; adding column to assign week number to dates
+moneyweek$Day &lt;- as.numeric(as.character(moneyweek$Day))
+moneyweek &lt;- mutate(moneyweek, Week = ifelse(Day %in% 1:8, 1, 
+    ifelse(Day %in% 9:16, 2, ifelse(Day %in% 17:23, 3, 4))))
+moneyweek &lt;- moneyweek %&gt;% group_by(Month, Week, Year) %&gt;% summarise(Starbucks = sum(Starbucks), 
+    CFA = sum(CFA), UT = sum(UT), Boba = sum(Boba))</code></pre>
+<p>First thing I did after downloading required packages was import all the datasets I would be using for this project. I combined all my monthly credit card statements using rbind into one large dataset. Within this binded dataset I split the date into separate columns of month, day, and year. I filtered out positive numbers in the dataset as those would indicate money being added into my account. Restaurants at different locations were labelled differently in the credit card statements, so I relabeled the restaurant names. For example, Gong Cha and KFTea are both bubble tea restaurants, so I renamed them both to &quot;Boba&quot; for better grouping purposes. I then filtered the data to only show the foods I spent the most money on. I used pivot_wider to change the rows of restuarants to columns, taking values from amount. Month numbers in the data were changed to character names. I then used mutate and the ifeslse function to assign week numbers to my data. This was added for better summary statistics and for easier joining. Especially when it comes to money, it makes more sense to first group the data by some timeline rather than looking at the spending day by day.</p>
+<pre class="r"><code># data from my fitness app
+fitdata &lt;- FITINDEX_Jules %&gt;% select(`Time of Measurement`, Weight, 
+    BMI)
+# separating date column into month, day, and year
+fitdata &lt;- tidyr::separate(fitdata, &quot;Time of Measurement&quot;, c(&quot;Month&quot;, 
+    &quot;Day&quot;, &quot;Year&quot;))
+# removing &#39;lb&#39; from column
+fitdata$Weight &lt;- as.numeric(substr(fitdata$Weight, 0, nchar(fitdata$Weight) - 
+    2))
+# adding week number to dates
+fitdata &lt;- mutate(fitdata, Week = ifelse(Day %in% 1:8, 1, ifelse(Day %in% 
+    9:16, 2, ifelse(Day %in% 17:23, 3, 4))))
+# compile data into new dataframe
+fitdata &lt;- fitdata %&gt;% group_by(Month, Week, Year) %&gt;% summarise(avgweight = mean(Weight), 
+    avgbmi = mean(BMI))
+# filter out dates from before the past year
+fitdata20 &lt;- fitdata %&gt;% filter(Year == 2020)
+fitdata19 &lt;- fitdata %&gt;% filter(Year == 2019 &amp; Month %in% c(&quot;Sep&quot;, 
+    &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;))
+fitdata &lt;- union(fitdata19, fitdata20)</code></pre>
+<p>From my fitness app data, I selected the variables I would be working with for this project and split the time of measurement into month, day, and year columns. Because there were the characters &quot;lb&quot; at the end of every cell in the weight column, I eliminated those characters then turned the weight column into a numeric variable. Like the money dataset, I mutated the fitness data by adding a column for week number. The fitness data started from many years ago, so I filtered for years 2019 and 2020. Because the months were from two different years, I created two datasets to specify with months were from 2019 vs 2020 then joined them back together using the union function.</p>
+<pre class="r"><code># insluin data split date
+totalinsulin &lt;- total_insulin %&gt;% separate(Date, into = c(&quot;Year&quot;, 
+    &quot;Month&quot;, &quot;Day&quot;))
+# change month to names
+totalinsulin$Month[totalinsulin$Month == &quot;01&quot;] &lt;- &quot;Jan&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;02&quot;] &lt;- &quot;Feb&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;03&quot;] &lt;- &quot;Mar&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;04&quot;] &lt;- &quot;Apr&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;05&quot;] &lt;- &quot;May&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;06&quot;] &lt;- &quot;Jun&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;07&quot;] &lt;- &quot;Jul&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;08&quot;] &lt;- &quot;Aug&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;09&quot;] &lt;- &quot;Sep&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;10&quot;] &lt;- &quot;Oct&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;11&quot;] &lt;- &quot;Nov&quot;
+totalinsulin$Month[totalinsulin$Month == &quot;12&quot;] &lt;- &quot;Dec&quot;
+# taking out outliers on days insulin was not used/machine
+# was broken
+totalinsulin &lt;- totalinsulin %&gt;% filter(`Total Intake` != &quot;none&quot;)
+# adding week number to dates
+totalinsulin$Day &lt;- as.numeric(as.character(totalinsulin$Day))
+totalinsulin$`Total Intake` &lt;- as.numeric(as.character(totalinsulin$`Total Intake`))
+totalinsulin &lt;- mutate(totalinsulin, Week = ifelse(Day %in% 1:8, 
+    1, ifelse(Day %in% 9:16, 2, ifelse(Day %in% 17:23, 3, 4))))
+# compile into new dataframe
+totalinsulin &lt;- totalinsulin %&gt;% group_by(Month, Week, Year) %&gt;% 
+    summarise(avgintake = mean(`Total Intake`))</code></pre>
+<p>I repeated most of the same process for my insulin data. I split the date column into year, month, and day, renamed the month columns, and added a column that assigned week numbers to the dataset. There were some days I did not have an entry for insulin usage, so I filtered that out also. In the end I compiled everything into a new dataframe, summarizing the average intake per week.</p>
+</div>
+<div id="joiningmerging" class="section level2">
+<h2>2. Joining/merging</h2>
+<pre class="r"><code># merge data
+joineddata &lt;- full_join(fitdata, totalinsulin) %&gt;% full_join(moneyweek)
+# replace NA&#39;s with 0 for money
+joineddata$Starbucks[is.na(joineddata$Starbucks)] = 0
+joineddata$CFA[is.na(joineddata$CFA)] = 0
+joineddata$UT[is.na(joineddata$UT)] = 0
+joineddata$Boba[is.na(joineddata$Boba)] = 0</code></pre>
+<p>I did a full join of my datasets so that all observations would be included, even if some datasets were missing days that the others did not. I was also joining by multiple columns (Month, Week, and Year), and R was smart enough to do this on its own without specification from code. This was essential in order to get a good overall look at my numbers. All the NA's in the dataset from my credit card were replaced with the value 0 so that the mean and sum could be computed. In order to get an accurate representation of my average spending grouped my month, week, or year, the NA's needed to be replaced with 0's instead of being deleted.</p>
+</div>
+<div id="create-summary-statistics" class="section level2">
+<h2>3. Create summary statistics</h2>
+<pre class="r"><code># compare average weight for school months vs home months add
+# column that specifies home/school months
+joineddata &lt;- joineddata %&gt;% filter(Month %in% c(&quot;Sep&quot;, &quot;Oct&quot;, 
+    &quot;Nov&quot;, &quot;Feb&quot;, &quot;Mar&quot;)) %&gt;% mutate(Location = &quot;School&quot;) %&gt;% 
+    union(joineddata %&gt;% filter(Month %in% c(&quot;Aug&quot;, &quot;Dec&quot;, &quot;Jan&quot;, 
+        &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;)) %&gt;% mutate(Location = &quot;Home&quot;))
+joineddata %&gt;% group_by(Location) %&gt;% summarise(mean(avgweight, 
+    na.rm = T))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   Location `mean(avgweight, na.rm = T)`
+##   &lt;chr&gt;                           &lt;dbl&gt;
+## 1 Home                          123.662
+## 2 School                        125.561</code></pre>
+<pre class="r"><code># select and arrange for average weight
+joineddata %&gt;% select(Month, Year, avgweight) %&gt;% group_by(Month, 
+    Year) %&gt;% arrange(avgweight)</code></pre>
+<pre><code>## # A tibble: 54 x 4
+## # Groups:   Month, Year [14]
+##     Week Month Year  avgweight
+##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+##  1     4 Jul   2020    120.025
+##  2     1 Aug   2020    120.333
+##  3     3 Aug   2020    120.5  
+##  4     2 Aug   2020    120.6  
+##  5     1 Jul   2020    121.333
+##  6     2 Jul   2020    121.333
+##  7     3 Jul   2020    121.4  
+##  8     4 Jun   2020    121.52 
+##  9     2 Sep   2020    122.4  
+## 10     3 Sep   2020    123    
+## # … with 44 more rows</code></pre>
+<pre class="r"><code># summary statistics of overall data first change negative
+# spending numbers to positive
+joineddata$Starbucks = joineddata$Starbucks * -1
+joineddata$CFA = joineddata$CFA * -1
+joineddata$UT = joineddata$UT * -1
+joineddata$Boba = joineddata$Boba * -1
+
+joineddata %&gt;% ungroup() %&gt;% summarise_if(is.numeric, mean, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 1 x 8
+##      Week avgweight  avgbmi avgintake Starbucks     CFA      UT    Boba
+##     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 2.46296   124.482 22.9066   50.6556   19.9074 4.88093 3.50833 2.93056</code></pre>
+<pre class="r"><code>joineddata %&gt;% ungroup() %&gt;% summarise_if(is.numeric, min, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 1 x 8
+##    Week avgweight avgbmi avgintake Starbucks   CFA    UT  Boba
+##   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1   120.025   22.1     37.89         0     0     0     0</code></pre>
+<pre class="r"><code>joineddata %&gt;% ungroup() %&gt;% summarise_if(is.numeric, max, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 1 x 8
+##    Week avgweight avgbmi avgintake Starbucks   CFA    UT  Boba
+##   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     4     128.4   23.6   66.8871        75 28.78 42.64 27.89</code></pre>
+<pre class="r"><code>joineddata %&gt;% ungroup() %&gt;% summarise_if(is.numeric, sd, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 1 x 8
+##      Week avgweight   avgbmi avgintake Starbucks     CFA      UT    Boba
+##     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 1.12791   2.18345 0.402034   6.12126   20.7976 8.01910 8.37659 6.12600</code></pre>
+<pre class="r"><code>joineddata %&gt;% ungroup() %&gt;% summarise_if(is.numeric, IQR, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 1 x 8
+##    Week avgweight   avgbmi avgintake Starbucks    CFA    UT  Boba
+##   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1.75   3.06500 0.522143   7.79250      32.5 7.9725 0.885     0</code></pre>
+<pre class="r"><code>joineddata %&gt;% ungroup() %&gt;% select(Starbucks, CFA, UT, Boba) %&gt;% 
+    summarise_if(is.numeric, sum, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   Starbucks    CFA     UT   Boba
+##       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1      1075 263.57 189.45 158.25</code></pre>
+<p>Before looking at summary statistics I added a column to my joined dataset that specified which months were school months (when I lived in Austin), and which months I was living at home. On average, I am about 2 pounds heavier during schools months than home months. After ordering my weight, it looks like my lowest weight recorded was near the end of July at 120 pounds. Looking at the data overall and ungrouped, my average weight was 124.48 pounds and average insulin intake was 50.6 units. I spent the most at Starbucks per week at an average of 19.9 dollars, with the second highest being CFA (Chick-fil-a) at 4.88 dollars per week. My minimum weight, bmi, and insulin intake was 120.025 lb, 22.1, and 37.89 units respectively. The maximum recorded weight and insulin intake was 128.4lbs and 66.88 units respectively. The maximum spent in a week at a restaurant was Starbucks at 75 dollars, and in second was for campus food (UT) at 42.64 dollars. In regard to physical statistics, my average intake had the greatest standard deviation at 6.12 and my average weight had a standard deviation of 2.18 pounds. The IQR was pretty large for average insulin intake at 7.79, meaning the “middle values” of the the data is actually spread out a good amount. The greatest surprise is in my total spending for the year on foods. I spent 1075 dollars at Starbucks, 263.57 dollars at CFA, 189.45 dollars on campus food, and 158.25 dollars on boba. It looks like a very large part of my food spending was dedicated to Starbucks.</p>
+<pre class="r"><code># summarize statistics grouped by different variables average
+# per week spend on starbucks grouped by location
+joineddata %&gt;% group_by(Location) %&gt;% summarise(mean(Starbucks, 
+    na.rm = T))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   Location `mean(Starbucks, na.rm = T)`
+##   &lt;chr&gt;                           &lt;dbl&gt;
+## 1 Home                          14.1071
+## 2 School                        26.1538</code></pre>
+<pre class="r"><code># average per week of weight grouped by location
+joineddata %&gt;% group_by(Location) %&gt;% summarise(mean(avgbmi, 
+    na.rm = T))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   Location `mean(avgbmi, na.rm = T)`
+##   &lt;chr&gt;                        &lt;dbl&gt;
+## 1 Home                       22.7616
+## 2 School                     23.0973</code></pre>
+<pre class="r"><code># spending on food per month
+joineddata %&gt;% ungroup() %&gt;% select(Month, Year, Starbucks, UT, 
+    Boba, CFA) %&gt;% group_by(Month) %&gt;% summarise_if(is.numeric, 
+    sum, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 12 x 5
+##    Month Starbucks    UT  Boba   CFA
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Apr          75  0     0     0   
+##  2 Aug           0  0    27.89  0   
+##  3 Dec         125 19.02 10.82 27.07
+##  4 Feb         150 69.88 36.39 58.59
+##  5 Jan         150 50.1  39.57  6.48
+##  6 Jul           0  0    11.71  0   
+##  7 Jun           0  0     5.73  0   
+##  8 Mar         125 37.7  10.64 41.72
+##  9 May          45  0     0     0   
+## 10 Nov         115  3.44  0    50.76
+## 11 Oct         175  7.16  0    52.73
+## 12 Sep         115  2.15 15.5  26.22</code></pre>
+<pre class="r"><code># average weight, bmi, and insulin intake per month
+joineddata %&gt;% ungroup() %&gt;% select(Month, Year, avgweight, avgbmi, 
+    avgintake) %&gt;% group_by(Month) %&gt;% summarise_if(is.numeric, 
+    mean, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 12 x 4
+##    Month avgweight  avgbmi avgintake
+##    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+##  1 Apr     126.45  23.2833   46.8300
+##  2 Aug     120.478 22.1611   52.3295
+##  3 Dec     125.845 23.155    50.2875
+##  4 Feb     124.52  22.9152   53.7729
+##  5 Jan     124.312 22.8918   44.4343
+##  6 Jul     121.023 22.2708   49.5797
+##  7 Jun     122.765 22.6112   52.9341
+##  8 Mar     125.067 23        55.9387
+##  9 May     125.359 23.0688   47.5201
+## 10 Nov     125.362 23.06     51.6017
+## 11 Oct     126.024 23.176    46.0170
+## 12 Sep     125.911 23.1639   54.7985</code></pre>
+<pre class="r"><code># min and max of weight and insulin intake for whole dataset
+joineddata %&gt;% ungroup() %&gt;% select(avgweight, avgintake) %&gt;% 
+    summarise_all(range, na.rm = T)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   avgweight avgintake
+##       &lt;dbl&gt;     &lt;dbl&gt;
+## 1   120.025   37.89  
+## 2   128.4     66.8871</code></pre>
+<pre class="r"><code># correlation matrix
+joinedmatrix &lt;- joineddata %&gt;% ungroup() %&gt;% filter(!is.na(avgweight)) %&gt;% 
+    select(avgweight, avgintake, Starbucks, CFA, UT, Boba) %&gt;% 
+    cor()
+joinedmatrix</code></pre>
+<pre><code>##              avgweight   avgintake  Starbucks       CFA         UT        Boba
+## avgweight  1.000000000 -0.09677283  0.5065904 0.3935202 0.11756036 0.005311403
+## avgintake -0.096772828  1.00000000 -0.2085334 0.1698422 0.02342771 0.079668556
+## Starbucks  0.506590418 -0.20853335  1.0000000 0.6142247 0.52991543 0.392305556
+## CFA        0.393520178  0.16984222  0.6142247 1.0000000 0.39011698 0.193941675
+## UT         0.117560359  0.02342771  0.5299154 0.3901170 1.00000000 0.475523847
+## Boba       0.005311403  0.07966856  0.3923056 0.1939417 0.47552385 1.000000000</code></pre>
+<p>Grouped by location, I’m spending an average of 12.05 dollars more a week on starbucks at school than at home. My bmi is also slightly higher at school. Grouped by month, I spent the most on food in February, spending a good amount of money on all four categories of foods. My highest average weight grouped by month was in April, yet my highest average insulin intake was in march. Overall my weight fluctuated (or had a range of) 8.4lbs and my insulin intake fluctuated 29 units. In the correlation plot there is a moderate positive correlation between average weight and Starbucks. There also generally a positive correlation between spending at the different restaurants. Interestingly, there looks to be a slight negative correlation between Starbucks and insulin intake, and with insulin intake and average weight.</p>
+</div>
+<div id="make-visualizations" class="section level2">
+<h2>4. Make visualizations</h2>
+<pre class="r"><code># correlation heatmap
+corrplot::corrplot(joinedmatrix, method = &quot;circle&quot;)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /> The corrleation heatmap basically reiterated the correlation matrix but with a plot that is visually easier to understand and is more pleasing to the eye. We can see that the larger the circle, the stronger of a correlation. A blue color would indicate a positive correlation and an orange color would indicate a negative correlation. Here you can see the blue circles are greater in quantity and in size (ignoring the diagonal where the correlation is perfect).</p>
+<pre class="r"><code># ggplot setup
+bymonth &lt;- joineddata %&gt;% ungroup() %&gt;% select(Month, Year, avgweight, 
+    avgbmi, avgintake, Starbucks, CFA, UT, Boba, Location) %&gt;% 
+    group_by(Month, Year, Location) %&gt;% summarise_if(is.numeric, 
+    mean, na.rm = T)
+bymonth$Date &lt;- as.Date(paste(&quot;01&quot;, bymonth$Month, bymonth$Year, 
+    sep = &quot;-&quot;), &quot;%d-%b-%Y&quot;)
+# weight per month color by location
+ggplot(bymonth, aes(Date, avgweight)) + geom_line() + geom_point(aes(color = Location)) + 
+    labs(title = &quot;Weight per Month by Location&quot;, x = &quot;Date&quot;, 
+        y = &quot;Weight (lb)&quot;) + theme_linedraw() + scale_y_continuous(breaks = round(seq(min(bymonth$avgweight), 
+    max(bymonth$avgweight), by = 0.5), 1)) + scale_color_manual(values = c(&quot;pink&quot;, 
+    &quot;blue&quot;))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /> To make this first plot I regrouped the month, week, and year column so that the x axis could be ordered correctly by date. The three variables graphed here are date and weight, with the dots colored by location. I manually colored the dots pink and blue and changed the theme. I also added more tick marks on the y-axis for better readability on my weight. This graph shows that my weight had quite a bit of fluctuation over the past year. Except for the end of 2019, the general trend shown in this graph is that the pink dots have a negative slope, while the blue dots have a positive slope. This shows that my weight decreases during months I am at home and increases when I go back to school. The largest change in weight is during the time I was at home for five consecutive months, with my weight sharply increasing right as school begins. This is in line with my hypothesis that I tend to eat better and healthier foods during home months compared to school months, facilitating weight loss.</p>
+<pre class="r"><code># Average Spent on Food per Week by Month
+monthlymoney &lt;- bymonth %&gt;% ungroup() %&gt;% select(Date, Starbucks, 
+    CFA, UT, Boba, avgweight) %&gt;% pivot_longer(c(&quot;Starbucks&quot;, 
+    &quot;CFA&quot;, &quot;UT&quot;, &quot;Boba&quot;), names_to = &quot;Restaurant&quot;, values_to = &quot;Spending&quot;)
+
+ggplot(monthlymoney, aes(Date, Spending)) + geom_line(aes(color = Restaurant)) + 
+    theme_minimal() + scale_color_manual(values = c(&quot;pink&quot;, &quot;blue&quot;, 
+    &quot;green&quot;, &quot;purple&quot;)) + labs(title = &quot;Average Spent on Food per Week by Month&quot;, 
+    x = &quot;Date&quot;, y = &quot;Spending per Week&quot;)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This graph shows my spending habits over the past year, separated by type of foods. To do this I used pivot_longer to change my columns of restaurants back into rows. The y-axis shows the average spending per week on these foods. From this graph, it is apparent there is a large gap between my Starbucks spending compared to the others. The peak in the Starbucks line graph also coincides with a peak in my weight in the previous plot. This shows that there is a possibility that because Starbucks makes up most of my spending, it could also have more control over my weight. Generally, it looks like all spending starts to decrease greatly as summer begins. This also matches up very well with the plot before, with my weight taking a large dip durng those same months. This aligns well with my expectations that my spending could influence my weight, and that I spend less money on foods while I am living at home.</p>
+<pre class="r"><code># ggplot of average insulin intake per month by location
+ggplot(bymonth, aes(x = Date, y = avgintake, fill = Location)) + 
+    geom_point(aes(y = avgintake, color = Location, size = avgweight), 
+        stat = &quot;summary&quot;, fun = mean) + labs(title = &quot;Average Insulin Intake per Month by Location&quot;, 
+    x = &quot;Date&quot;, y = &quot;Average Insulin Intake&quot;) + theme_gray() + 
+    scale_color_manual(values = c(&quot;pink&quot;, &quot;blue&quot;))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This graph, grouped by month, shows my average insulin intake over time, colored by location, and sized by average weight (using stat=&quot;summary&quot;). Unsurprisingly, the blue dots are more concentrated at the top while the pink dots are generally lower. This would make sense as the plots before showed a large decrease in weight and food spending during months I am at home. However, what is surprising is the relationship between insulin intake and weight. I would expect dots higher on the y-axis to be much larger than those lower on the graph. However, there are some pink dots at the bottom of the plot that are actually bigger than the ones above them. I expected there to be a clear and strong correlation between insulin intake and weight, but it does not look like there is.</p>
+</div>
+<div id="perform-pam-clustering" class="section level2">
+<h2>5. Perform PAM clustering</h2>
+<pre class="r"><code># create dataset for pam data
+library(cluster)
+
+clustdata &lt;- joineddata %&gt;% ungroup() %&gt;% select(CFA, avgintake, 
+    avgweight) %&gt;% filter_all(is.finite) %&gt;% filter(CFA != 0)
+pam1 &lt;- clustdata %&gt;% select(CFA, avgintake, avgweight) %&gt;% scale %&gt;% 
+    pam(k = 3)
+# saving cluster assignment as a column in my dataset
+pamcluster &lt;- clustdata %&gt;% mutate(cluster = as.factor(pam1$clustering))
+pamcluster$cluster &lt;- as.numeric(as.character(pamcluster$cluster))
+pam2 &lt;- pamcluster %&gt;% select(CFA, avgintake, avgweight) %&gt;% 
+    scale %&gt;% pam(3)
+pam2</code></pre>
+<pre><code>## Medoids:
+##      ID        CFA  avgintake   avgweight
+## [1,]  1 -0.4357335 -0.2208916  0.07474239
+## [2,] 11 -0.8548402 -0.8233335 -1.36081166
+## [3,] 14  0.6001437  0.9561697  0.51241130
+## Clustering vector:
+##  [1] 1 2 1 3 1 1 3 3 1 1 2 3 3 3 1 1
+## Objective function:
+##    build     swap 
+## 1.068314 1.068314 
+## 
+## Available components:
+##  [1] &quot;medoids&quot;    &quot;id.med&quot;     &quot;clustering&quot; &quot;objective&quot;  &quot;isolation&quot; 
+##  [6] &quot;clusinfo&quot;   &quot;silinfo&quot;    &quot;diss&quot;       &quot;call&quot;       &quot;data&quot;</code></pre>
+<p>First I filtered my data for the varaibles I wanted to use for my PAM plot: CFA, average insulin intake, and average weight. I filtered out values where CFA was 0 so that there are no unnecessary clusters of points with those values. I then saved the cluster assignment into my dataset as a new column. I then scaled the numbers and used the pam function into a 3 clusters and output the medoids, objective function, and available components.</p>
+<pre class="r"><code># Silhouette plot of PAM
+pam2$silinfo$avg.width</code></pre>
+<pre><code>## [1] 0.1794484</code></pre>
+<pre class="r"><code>plot(pam2, which = 2)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The larger the silhouette width the better fit the individual data is in our classification and the better quality the clusters are. The average silhouette width is 0.18. This is fairly low, meaning no substantial structure has been found.</p>
+<pre class="r"><code># number of clusters in PAM
+pam3 &lt;- clustdata %&gt;% select(CFA, avgintake, avgweight)
+sil_width &lt;- vector()
+for (i in 2:10) {
+    pam_fit &lt;- pam(pam3, k = i)
+    sil_width[i] &lt;- pam_fit$silinfo$avg.width
+}
+ggplot() + geom_line(aes(x = 1:10, y = sil_width)) + scale_x_continuous(name = &quot;k&quot;, 
+    breaks = 1:10)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /> I first created a dataset called pam3 that selected the variables I needed to work with. Then, I created an empty vector to hold the mean silhouette width. I then used a for loop to compute these means and store it into the vector to create a line graph. In the graph the peak is at k=3, indicating that the best way to separate my data points is by 3 clusters.</p>
+<pre class="r"><code># visualize
+library(plotly)
+library(GGally)
+pamcluster %&gt;% plot_ly(x = ~avgintake, y = ~avgweight, z = ~CFA, 
+    color = ~cluster, type = &quot;scatter3d&quot;, mode = &quot;markers&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"visdat":{"16a043c381f8e":["function () ","plotlyVisDat"]},"cur_data":"16a043c381f8e","attrs":{"16a043c381f8e":{"x":{},"y":{},"z":{},"mode":"markers","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"avgintake"},"yaxis":{"title":"avgweight"},"zaxis":{"title":"CFA"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[48.625,46.31875,51.8914285714286,59.5714285714286,41.85375,41.2842857142857,51.15625,59.01,42.3557142857143,44.64125,44.64625,61.96,52.8125,56.39875,47.1175,51.69875],"y":[125.8,124.35,125.1,126.2,126.3,126.12,126,127.6,128.4,125,124.16,124.4,125.066666666667,126.3,125.38,125.257142857143],"z":[11.63,6.27,12.27,20.59,17.52,6.43,28.78,13.9,12.32,24.48,8.81,18.82,17.62,18.6,8.47,6.48],"mode":"markers","type":"scatter3d","marker":{"colorbar":{"title":"cluster","ticklen":2},"cmin":1,"cmax":3,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666666","rgba(70,19,97,1)"],["0.0833333333333334","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[1,2,1,3,1,1,3,3,1,1,2,3,3,3,1,1],"line":{"colorbar":{"title":"","ticklen":2},"cmin":1,"cmax":3,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666666","rgba(70,19,97,1)"],["0.0833333333333334","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[1,2,1,3,1,1,3,3,1,1,2,3,3,3,1,1]}},"frame":null},{"x":[41.2842857142857,61.96],"y":[124.16,128.4],"type":"scatter3d","mode":"markers","opacity":0,"hoverinfo":"none","showlegend":false,"marker":{"colorbar":{"title":"cluster","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"cmin":1,"cmax":3,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666666","rgba(70,19,97,1)"],["0.0833333333333334","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"color":[1,3],"line":{"color":"rgba(255,127,14,1)"}},"z":[6.27,28.78],"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>ggplot(pamcluster, aes(x = avgintake, y = CFA, color = cluster)) + 
+    geom_point()</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-14-2.png" width="672" style="display: block; margin: auto;" /> In two plots above there seems to be a moderate correlation between spending at Chick- Fil-A and average insulin intake. This is not surprising as I would expect a greater insulin intake while spending more money on fast foods. However, in the 3D plot there does not seem to be a correlation between average weight and insulin intake, as the spread of those plots are pretty uniform. The clusters in these plots are not very compact. However, this could be due to either high variance or purely due to the limited number of plots available in the dataset.</p>
+<P style="page-break-before: always">
+
+<pre class="r"><code>data(package = .packages(all.available = TRUE))</code></pre>
+<p>...</p>
+</div>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

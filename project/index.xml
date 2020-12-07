@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Julia&#39;s Final Project!</title>
+    <link>/project/</link>
+    <description>Recent content in Projects on Julia&#39;s Final Project!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project 1: Exploratory Data Analysis</title>
+      <link>/project/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project1/</guid>
+      <description>0. Introduction The datasets I will be using for this project come from three sources: my credit card statements, my fitness app, and my PDM (insulin delivery device). I am computing to see if there is a correlation between my food spending habits, my weight, and how much insulin I am using. My credit card data contains every transaction on my card from the past year.</description>
+    </item>
+    
+    <item>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project2/</guid>
+      <description>0. Introduction Ever since I purchased a Nitendo Switch a few years ago, I have been playing Super Smash Bro&#39;s Ultimate regularly. Each character in the game has their own combination of skills and characteristics. Every time a new Smash game is released, there is a tier list that is compiled based off of tournament winnings and rankings by those who play professionally. The tier rankings change with every version of the game due to new characters being introduced and upgrades in the game itself.</description>
+    </item>
+    
+  </channel>
+</rss>

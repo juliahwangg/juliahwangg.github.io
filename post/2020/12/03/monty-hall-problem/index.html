@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Julia Hwang" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../../img/favicon.ico">
+    <title>Monty Hall Problem</title>
+    <meta name="generator" content="Hugo 0.79.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../../../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../../../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../../../../post/">BLOG</a></li>
+        
+        <li><a href="../../../../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../../../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../../../../post/2020/12/03/monty-hall-problem/">Monty Hall Problem</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         December 3, 2020 
+            &nbsp;&nbsp;
+            
+            <span class="label label-success">Python</span>
+            
+            <span class="label label-success">R</span>
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+<link href="../../../../../rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="../../../../../rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="lets-talk-about-python" class="section level1">
+<h1>Let's talk about python !</h1>
+<div id="to-look-at-some-python-functions-lets-do-something-fun.-in-the-beginning-of-the-semester-my-professor-dr.-woodward-talked-about-the-monty-hall-problem.-this-is-a-fairly-popular-dilemma.-if-you-are-completely-unfamiliar-with-the-problem-google-will-probably-give-a-better-explanation-but-if-you-just-need-a-refresher-ill-do-a-quick-synopsis." class="section level3">
+<h3>To look at some python functions, Let's do something fun. In the beginning of the semester my professor, Dr. Woodward, talked about the Monty Hall problem. This is a fairly popular dilemma. If you are completely unfamiliar with the problem Google will probably give a better explanation, but if you just need a refresher I'll do a quick synopsis.</h3>
+</div>
+<div id="lets-say-in-a-game-show-there-are-three-doors.-behind-two-of-the-doors-are-dog-poop-and-behind-one-of-the-doors-contains-a-new-tesla.-of-course-you-dont-know-which-door-contains-the-tesla-but-the-game-show-host-does.-so-now-the-host-asks-you-to-choose-a-door-to-open-and-lets-say-you-choose-door-1.-however-the-host-opens-door-3-instead-revealing-dog-poop.-then-he-asks-if-you-would-like-to-change-your-pick-to-door-2.-should-you-switch-your-choice" class="section level3">
+<h3>Let's say in a game show there are three doors. Behind two of the doors are dog poop and behind one of the doors contains a new Tesla. Of course, you dont know which door contains the Tesla, but the game show host does. So now the host asks you to choose a door to open and let's say you choose door #1. However, the host opens door #3 instead, revealing dog poop. Then he asks if you would like to change your pick to door #2. Should you switch your choice?</h3>
+</div>
+<div id="many-people-assume-it-shouldnt-matter-and-believe-that-well-if-there-are-two-doors-left-shouldnt-it-be-a-5050-chance-of-getting-poop-or-a-new-tesla-the-answer-actually-is-no.-you-should-in-fact-switch-doors." class="section level3">
+<h3>Many people assume it shouldn't matter and believe that well, if there are two doors left, shouldn't it be a 50/50 chance of getting poop or a new tesla? The answer actually is no. You SHOULD in fact switch doors.</h3>
+</div>
+<div id="lets-think-about-it-in-a-way-that-would-be-easier-to-understand.-lets-say-instead-of-three-doors-there-were-a-hundred-and-you-decide-to-pick-door-1.-before-the-host-opens-door-1-he-opens-all-the-doors-except-for-doors-1-and-2-which-all-reveal-poop.-now-would-you-switch-doors" class="section level3">
+<h3>Let's think about it in a way that would be easier to understand. Let's say instead of three doors, there were a hundred and you decide to pick door #1. Before the host opens door #1, he opens all the doors except for doors #1 and #2, which all reveal poop. Now would you switch doors?</h3>
+</div>
+<div id="lets-think-about-this-mathemathically.-when-three-doors-are-closed-and-you-choose-one-door-lets-say-door-1-theres-a-13-chance-that-you-chose-the-correct-door-and-a-23-chance-that-you-did-not.-in-this-instance-it-seems-like-an-equal-probability-of-every-door-containing-the-prize.-once-the-host-opens-door-3-the-probability-that-you-chose-the-correct-door-is-still-13.-this-probability-does-not-change-when-the-third-door-is-opened-because-your-inital-choice-was-made-when-the-all-three-doors-were-closed.-this-means-there-is-still-a-23-chance-that-the-prize-is-not-in-door-1-but-in-door-2.-therefore-we-would-expect-about-a-23-probability-of-winning-by-switching-your-choice." class="section level3">
+<h3>Let's think about this mathemathically. When three doors are closed and you choose one door (Let's say door #1), there's a 1/3 chance that you chose the correct door and a 2/3 chance that you did not. In this instance it seems like an equal probability of every door containing the prize. Once the host opens door 3, the probability that you chose the correct door is still 1/3. This probability does not change when the third door is opened because your inital choice was made when the all three doors were closed. This means there is still a 2/3 chance that the prize is not in door #1 but in door #2. Therefore, we would expect about a 2/3 probability of winning by switching your choice.</h3>
+</div>
+<div id="lets-actually-prove-that-you-should-switch-doors-by-replicating-the-three-door-experiment-in-python-then-calculating-our-chances-of-winning.-below-is-the-code-ive-created.-the-code-will-be-split-into-chunks-and-each-respective-description-explaining-the-code-will-be-written-at-the-end." class="section level3">
+<h3>Let's actually prove that you should switch doors by replicating the three door experiment in python then calculating our chances of winning. Below is the code I've created. The code will be split into &quot;chunks&quot; and each respective description explaining the code will be written at the end.</h3>
+<p>First, Let's define a function that will generate a random number from 1 to n.</p>
+<pre class="python"><code>from __future__ import division 
+import random
+
+#defining random roll
+def roll(n):
+    return random.randint(1,n)</code></pre>
+<p>Now Let's create a function where the computer will automate a random door number with the prize and a random door number that will represent our guess. Then, we will assign a door that will be viewed (the door that will be opened after a guess is made). A series of if statements is used to ensure that the door viewed will not be one that is guessed or one that contains the prize. In this simulation the guess door is switched every time after a door a &quot;viewed&quot;. Using a series of if statements, the new guess is now the door that was not the original guess or the viewed door. Lastly, if the new guess door is the same as the prize door, we consider it a win. If it is not, the function should return a lose.</p>
+<pre class="python"><code>#simulate guess, view, prize, and new guess
+def runOneTrial():
+    prize = roll(3)
+    guess = roll(3)
+
+    view = 1
+    if prize !=2 and guess !=2:
+        view = 2
+    elif prize !=3 and guess !=3:
+        view = 3
+
+    newguess = 1
+    if view != 2 and guess != 2:
+        newguess = 2
+    elif view != 3 and guess != 3:
+        newguess = 3
+    
+    if newguess == prize:
+        return &quot;win&quot;
+    else:
+        return &quot;lose&quot;</code></pre>
+<p>Let's put it all together! We're going to start off with 0 wins, obviously. We're going to call the function we've created above on every trial. We're going to keep track of how many times we've won and loss the game. In the end, the probabilities of wins and losses are calculated depending on those numbers and the number of trials we run.</p>
+<pre class="python"><code>#put it all together and calculate wins
+def montyhall(trials):
+    wins = 0
+
+    for i in range(0, trials):
+        result = runOneTrial()
+        if result == &quot;win&quot;:
+            wins += 1
+              
+    prob = wins / trials
+    loseprob = 1 - prob
+    print(&quot;Probability of winning if you switch =&quot;,format(prob, &quot;.2f&quot;))
+    print(&quot;Probability of winning if you do not switch =&quot;,format(loseprob, &quot;.2f&quot;))
+    return prob</code></pre>
+<p>Time to test it out! Let's say we do this experiment a thousand times.</p>
+<pre class="python"><code>montyhall(1000)
+
+#output
+## Probability of winning if you switch = 0.64
+## Probability of winning if you do not switch = 0.36
+## 0.637</code></pre>
+<p>As you can see, the probability of winning if you switch doors is about 2/3 ! Do you believe me now?</p>
+</div>
+</div>
+<div id="lets-talk-about-reticulate" class="section level1">
+<h1>Lets talk about Reticulate</h1>
+<p>I was more comfortable with python when coding for the simulation. However, there are some things that I am more comfortable with in R. What should I do? Luckily, something called reticulate will allow me to use both python and R with my data! Let's try it out.</p>
+<p>Let's use both R and python to put an unbiased message string together.</p>
+<pre class="r"><code>library(reticulate)
+string &lt;- &quot;julia hwang is really...&quot;</code></pre>
+<p>We can add the strings together and then print out our fact.</p>
+<pre class="python"><code>string2 = &quot;cool and awesome and amazing&quot;
+print(r.string + string2)
+## julia hwang is really...cool and awesome and amazing</code></pre>
+<p>Let's try something else. I'll create a function using R to convert inches to centimeters.</p>
+<pre class="r"><code>howtall &lt;- function(inches){
+  cm &lt;- inches*2.52
+  print(cm)
+}</code></pre>
+<p>We can call our R function in python. Since I'm 62 inches tall let's see how many centimeters that is.</p>
+<pre class="python"><code>r.howtall(62)
+## 156.24</code></pre>
+<p>BAM I am a whole 156.24 cm tall. Should I just start referring to my height in centimeters to make myself sound taller?</p>
+<p>Anyway, hope this was fun to read!</p>
+</div>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../../../../js/docs.min.js"></script>
+<script src="../../../../../js/main.js"></script>
+
+<script src="../../../../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

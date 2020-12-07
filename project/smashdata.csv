@@ -1,0 +1,79 @@
+Character,Weight,air.speed,walk.speed,dash.speed,run.speed,grab.range,grab.stun,Gender,type,Tier
+Banjo & Kazooie,106,0.92,1.06,1.68,2.18,13.2,11,Male,DLC,C
+Bayonetta,81,1.019,0.945,1.936,1.76,12.5,11,Female,veteran,E
+Bowser,135,1.155,0.901,2.255,1.971,20,12,Male,veteran,B
+Bowser Jr.,108,1.134,0.924,1.76,1.566,18,15,Selectable,veteran,E
+Byleth,97,0.89,0.97,1.8,1.43,12.3,10,Female,DLC,C
+Captain Falcon,104,1.218,0.987,1.98,2.552,13,10,Male,veteran,C
+Chrom,95,1.302,1.208,2.2,2.145,14.2,11,Male,new,A
+Cloud,100,1.155,1.155,2.145,2.167,12,13,Male,veteran,D
+Corrin,98,1.019,1.208,1.892,1.595,11.8,11,Selectable,veteran,E
+Daisy,89,1.029,0.924,1.826,1.595,12,10,Female,new,S
+Dark Pit,96,0.935,1.259,2.09,1.828,13,10,Male,veteran,D
+Dark Samus,108,1.103,1.115,1.87,1.654,42.2,19,Female,new,C
+Diddy Kong,90,0.924,1.313,2.09,2.006,11.5,11,Male,veteran,D
+Donkey Kong,127,1.208,1.365,2.09,1.873,19.5,12,Male,veteran,E
+Dr. Mario,98,0.9238784,0.917301,1.5375712,1.397792,12,10,Male,veteran,F
+Duck Hunt,86,1.155,1.213,1.76,1.793,14.5,10,Neutral,veteran,B
+Falco,82,0.977,1.344,2.035,1.619,12,10,Male,veteran,C
+Fox,77,1.11,1.523,2.09,2.402,11,10,Male,veteran,A
+Ganondorf,118,0.83,0.767,1.87,1.34,14,12,Male,veteran,E
+Greninja,88,1.239,1.502,2.178,2.288,18.5,14,Neutral,veteran,C
+Hero,101,1.01,0.98,1.9,1.84,10.3,10,Male,DLC,C
+Ice Climbers,92,0.83,0.912,1.68,1.53,10,12,Neutral,veteran,D
+Ike,107,1.134,0.62,1.815,1.507,11.5,11,Male,veteran,C
+Incineroar,116,0.88,1.134,1.716,1.18,16,11,Neutral,new,E
+Inkling,94,1.208,1.14,2.118,1.925,12,12,Selectable,new,S
+Isabelle,88,1.02,1.103,1.815,1.48,19,18,Female,new,F
+Jigglypuff,68,1.332,1.12,1.65,1.271,12,10,Neutral,veteran,D
+Joker,93,1.1,0.825,1.9,2.06,12.3,10,Male,DLC,S
+Ken,103,1.12,1.029,1.936,1.76,11.6,10,Male,new,B
+King Dedede,127,0.735,0.903,1.815,1.496,17,12,Male,veteran,E
+King K. Rool,133,0.945,0.977,1.936,1.485,20,12,Male,new,E
+Kirby,79,0.84,1.247,1.9,1.727,12.5,10,Male,veteran,F
+Link,104,0.924,1.386,1.98,1.534,11,10,Male,veteran,B
+Little Mac,87,1.208,1.103,2.365,2.464,12.9,13,Male,veteran,F
+Lucario,92,1.281,0.893,2.255,1.705,13.5,11,Male,veteran,E
+Lucas,94,1.155,1.575,1.815,1.65,22.9,16,Male,veteran,D
+Lucina,90,1.071,1.134,2.255,1.964,14.5,10,Female,veteran,A
+Luigi,97,0.77,1.155,1.815,1.65,29.8,18,Male,veteran,C
+Mario,98,1.208,1.575,1.936,1.76,12,10,Male,veteran,B
+Marth,90,1.071,1.132,2.255,1.964,14.5,10,Male,veteran,D
+Mega Man,102,1.155,1.239,1.958,1.602,12.5,10,Male,veteran,C
+Meta Knight,80,1.04,1.26,2.211,2.09,11.5,11,Male,veteran,E
+Mewtwo,79,1.313,1.26,2.255,2.255,14.3,11,Neutral,veteran,D
+Min Min,104,0.85,1.1088,1.9,1.55,40,18,Male,DLC,A
+Mr. Game & Watch,75,1.176,0.907,1.98,1.679,12.5,10,Male,veteran,A
+Ness,94,1.007,0.945,1.826,1.609,12,10,Male,veteran,A
+Olimar,79,0.861,1.097,1.606,1.617,27.6,16,Male,veteran,B
+Pac-Man,95,1.092,1.271,1.87,1.672,28.2,16,Male,veteran,B
+Palutena,91,1,0.924,2.035,2.077,15,11,Female,veteran,S
+Peach,89,1.029,1.302,1.826,1.595,12,10,Female,veteran,S
+Pichu,62,1.029,1.302,1.98,1.892,12,10,Neutral,veteran,B
+Pikachu,79,0.957,0.76,1.98,2.039,11.9,11,Selectable,veteran,S
+Piranha Plant,112,1,1.259,1.82,1.72,14.3,10,Neutral,DLC,E
+Pit,96,0.935,1.008,2.09,1.828,13,10,Male,veteran,D
+R.O.B.,106,1.134,1.178,2.002,1.725,14.4,10,Male,veteran,B
+Richter,107,0.94,0.76,1.73,1.52,12,14,Male,new,D
+Ridley,107,1.05,1.1,1.8,2.2,16.5,12,Male,new,D
+Robin,95,1.05,0.936,1.815,1.265,13,11,Selectable,veteran,D
+Rosalina,82,1.05,1.138,2.035,1.795,14,11,Female,veteran,D
+Roy,95,1.302,1.208,2.2,2.145,14.2,11,Male,veteran,A
+Ryu,103,1.12,0.75,1.76,1.6,11.6,10,Male,veteran,E
+Samus,108,1.103,1.115,1.87,1.654,42.2,19,Female,veteran,C
+Sheik,78,1.155,1.47,2.178,2.42,12.5,10,Female,veteran,C
+Shulk,97,1.113,1.155,1.87,1.672,12.5,11,Male,veteran,S
+Simon,107,0.94,0.76,1.73,1.52,12,14,Male,new,D
+Snake,106,0.987,0.882,1.76,1.595,15.5,12,Male,veteran,A
+Sonic,86,1.208,1.444,2.31,3.85,12,11,Male,veteran,D
+Steve,92,0.86,0.85,1.45,1.45,31.9,18,Male,new,E
+Terry,108,0.95,0.85,1.65,1.72,13.7,10,Male,DLC,B
+Toon Link,91,1.05,1.288,1.914,1.906,28.2,16,Male,veteran,C
+Villager,92,0.987,1.092,1.815,1.397,19,18,Selectable,veteran,D
+Wario,107,1.271,0.889,1.837,1.65,14,12,Male,veteran,S
+Wii Fit Trainer,96,1.019,1.224,2.024,1.866,11.5,10,Selectable,veteran,C
+Wolf,92,1.281,1.208,2.09,1.54,12,9,Male,veteran,A
+Yoshi,104,1.344,1.208,1.98,2.046,26,18,Male,veteran,C
+Young Link,88,0.966,1.26,2.09,1.749,29.5,16,Male,veteran,C
+Zelda,85,1.092,0.914,1.958,1.43,15.3,14,Female,veteran,D
+Zero Suit Samus,80,1.26,1.47,2.42,2.31,37,19,Female,veteran,S

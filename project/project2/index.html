@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Julia Hwang" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>Project 2: Modeling, Testing, and Predicting</title>
+    <meta name="generator" content="Hugo 0.79.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../post/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../project/project2/">Project 2: Modeling, Testing, and Predicting</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         January 1, 0001 
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+<link href="../../rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>0. Introduction</h2>
+<div id="ever-since-i-purchased-a-nitendo-switch-a-few-years-ago-i-have-been-playing-super-smash-bros-ultimate-regularly.-each-character-in-the-game-has-their-own-combination-of-skills-and-characteristics.-every-time-a-new-smash-game-is-released-there-is-a-tier-list-that-is-compiled-based-off-of-tournament-winnings-and-rankings-by-those-who-play-professionally.-the-tier-rankings-change-with-every-version-of-the-game-due-to-new-characters-being-introduced-and-upgrades-in-the-game-itself." class="section level4">
+<h4>Ever since I purchased a Nitendo Switch a few years ago, I have been playing Super Smash Bro's Ultimate regularly. Each character in the game has their own combination of skills and characteristics. Every time a new Smash game is released, there is a tier list that is compiled based off of tournament winnings and rankings by those who play professionally. The tier rankings change with every version of the game due to new characters being introduced and upgrades in the game itself.</h4>
+</div>
+<div id="my-dataset-contains-numeric-and-categorical-variables-of-78-characters.-it-contains-each-characters-weight-air-speed-walking-speed-running-speed-dashing-speed-grab-range-and-grab-post-shieldstun.-when-playing-against-an-opponent-who-is-shielding-the-only-way-to-attack-the-opponent-is-by-grabbing-them-and-a-longer-grabbing-range-is-more-benificial.-also-a-player-cannot-grab-his-opponent-while-shilding-himself.-the-shield-must-be-broken-first-before-grabbing-and-there-is-some-lag-between-these-two-actions.-the-grab-post-shield-variable-is-the-number-of-dataframes-this-lag-is.-a-longer-time-between-shielding-and-grabbing-is-not-benificial-as-it-leaves-the-player-in-a-vulnerable-state-to-be-attacked.-the-dataset-also-contains-the-gender-type-and-tier-of-the-characters.-in-the-type-column-veteran-characters-are-those-that-were-a-part-of-the-original-game-new-characters-are-those-that-were-introduced-in-the-latest-version-and-dlc-characters-are-the-newest-additions-that-players-pay-money-to-download-into-their-console.-the-tiers-ranked-from-highest-to-lowest-is-as-follows-s-a-b-c-d-e-and-f.-in-regard-to-gender-selectable-characters-mean-the-character-has-both-male-and-female-options-for-play.-neutral-characters-are-characterized-as-5050-of-malefemale-or-the-gender-is-ambiguous." class="section level4">
+<h4>My dataset contains numeric and categorical variables of 78 characters. It contains each character's weight, air speed, walking speed, running speed, dashing speed, grab range, and grab post-shieldstun. When playing against an opponent who is shielding, the only way to attack the opponent is by grabbing them, and a longer grabbing range is more benificial. Also, a player cannot grab his opponent while shilding himself. The shield must be broken first before grabbing, and there is some lag between these two actions. The grab post-shield variable is the number of dataframes this lag is. A longer time between shielding and grabbing is not benificial as it leaves the player in a vulnerable state to be attacked. The dataset also contains the gender, type, and tier of the characters. In the &quot;Type&quot; column, veteran characters are those that were a part of the original game, new characters are those that were introduced in the latest version, and DLC characters are the newest additions that players pay money to download into their console. The tiers ranked from highest to lowest is as follows: S, A, B, C, D, E, and F. In regard to gender, &quot;selectable&quot; characters mean the character has both male and female options for play. Neutral characters are characterized as 50/50 of male/female or the gender is ambiguous.</h4>
+</div>
+<div id="i-expect-that-on-average-male-characters-will-be-heavier-than-female-and-neutral-characters.-in-regard-to-numeric-variables-i-would-assume-that-the-greatest-differences-would-be-between-veteran-characters-and-newdlc-characters.-because-dlc-characters-are-those-the-player-must-purchase-with-real-money-i-would-assume-dlc-characters-would-be-the-most-different-from-veteran-characters-as-no-one-would-pay-money-only-to-download-a-mediocre-character.-i-believe-that-heavy-weight-characters-have-a-disadvantage-when-in-play-especially-with-professionals-so-i-expect-to-see-significant-differences-in-many-numeric-and-categorical-variables-when-comparing-heavy-weight-characters-to-those-that-are-not." class="section level4">
+<h4>I expect that on average male characters will be heavier than female and neutral characters. In regard to numeric variables I would assume that the greatest differences would be between veteran characters and new/DLC characters. Because DLC characters are those the player must purchase with real money, I would assume DLC characters would be the most different from veteran characters, as no one would pay money only to download a mediocre character. I believe that heavy weight characters have a disadvantage when in play (especially with professionals), so I expect to see significant differences in many numeric and categorical variables when comparing heavy weight characters to those that are not.</h4>
+<pre class="r"><code>#load packages
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(readxl)
+
+#import datasets
+characterstats &lt;- read_excel(&quot;character stats.xlsx&quot;)
+categoricalstats &lt;- read_excel(&quot;more smash data.xlsx&quot;)
+
+#join data
+smashdata &lt;- full_join(characterstats, categoricalstats)
+
+#rename columns
+smashdata &lt;- smashdata %&gt;% rename(air.speed = &quot;Air Speed&quot;)
+smashdata &lt;- smashdata %&gt;% rename(walk.speed = &quot;Walk Speed&quot;)
+smashdata &lt;- smashdata %&gt;% rename(dash.speed = &quot;Dash Speed&quot;)
+smashdata &lt;- smashdata %&gt;% rename(run.speed = &quot;Run speed&quot;)
+smashdata &lt;- smashdata %&gt;% rename(grab.range = &quot;Grab Range&quot;)
+smashdata &lt;- smashdata %&gt;% rename(grab.stun = &quot;Grab, Shieldstun&quot;)</code></pre>
+</div>
+</div>
+<div id="manovaanovapost-hoctype-1-errorbonferroni-correction" class="section level2">
+<h2>1. MANOVA/ANOVA/Post-hoc/type 1 error/bonferroni correction</h2>
+<pre class="r"><code>#MANOVA assumptions
+library(rstatix)
+
+group &lt;- smashdata$type
+DVs &lt;- smashdata %&gt;% select(Weight, air.speed, walk.speed, run.speed, grab.range, grab.stun)
+
+#Test multivariate normality for each group (null: assumption met)
+#If any p&lt;.05, stop.
+sapply(split(DVs,group), mshapiro_test)</code></pre>
+<pre><code>##           DLC          new          veteran     
+## statistic 0.452971     0.5931743    0.8041885   
+## p.value   4.135612e-06 9.414363e-05 2.055967e-07</code></pre>
+<pre class="r"><code>#manova test for mean difference across type of character
+man1 &lt;- manova(cbind(Weight, air.speed, walk.speed, dash.speed, run.speed, grab.range, grab.stun) ~ type, data = smashdata)
+summary(man1)</code></pre>
+<pre><code>## Df Pillai approx F num Df den Df Pr(&gt;F)
+## type 2 0.31767 1.8883 14 140 0.03237 *
+## Residuals 75
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code># 7 anova tests
+summary.aov(man1)</code></pre>
+<pre><code>## Response Weight :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 1301.1 650.55 3.7871 0.02711 *
+## Residuals 75 12883.8 171.78
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response air.speed :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 0.09937 0.049685 2.5906 0.08167 .
+## Residuals 75 1.43843 0.019179
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response walk.speed :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 0.2453 0.122644 2.8542 0.06387 .
+## Residuals 75 3.2227 0.042969
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response dash.speed :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 0.32554 0.162772 4.6057 0.01298 *
+## Residuals 75 2.65059 0.035341
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response run.speed :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 0.2902 0.14510 1.0017 0.3721
+## Residuals 75 10.8632 0.14484
+##
+## Response grab.range :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 52.0 26.001 0.4533 0.6373
+## Residuals 75 4301.9 57.358
+##
+## Response grab.stun :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## type 2 25.81 12.9043 1.6563 0.1978
+## Residuals 75 584.35 7.7913</code></pre>
+<pre class="r"><code>#6 pairwise t (post-hoc)
+pairwise.t.test(smashdata$Weight, smashdata$type, p.adj = &quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  smashdata$Weight and smashdata$type 
+## 
+##         DLC   new  
+## new     0.968 -    
+## veteran 0.078 0.023
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>pairwise.t.test(smashdata$dash.speed, smashdata$type, p.adj = &quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  smashdata$dash.speed and smashdata$type 
+## 
+##         DLC   new  
+## new     0.682 -    
+## veteran 0.025 0.026
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>#bonferroni correction
+.05/(1+7+6)</code></pre>
+<pre><code>## [1] 0.003571429</code></pre>
+<pre class="r"><code>#type 1 error
+1-.95^14</code></pre>
+<pre><code>## [1] 0.512325</code></pre>
+<p>For the MANOVA assumptions test the p-value for veteran was much less than 0.05, meaning we reject the null hypothesis that all population variances/covariances are equal across groups. Either way, proceeding with the manova test, it showed a significant p-value meaning there is at least one significant difference of the numerical variables across 2 or more of the groups. The anova tests showed more specific statistics in that weight and dash speed were significantly different among two or more of the groups. Using an alpha value of 0.05, the pairwise t-tests showed that weight differed between veteran vs. new characters and dash speed differed between veteran vs. DLC and veteran vs. new characters. With 14 tests conducted, the bonferroni correction would make the p-value 0.0036. Using this value would make none of the pairwise t-tests significant between any groups. The probability of a type 1 error is 0.5123.</p>
+</div>
+<div id="randomization-test-mean-difference" class="section level2">
+<h2>2. Randomization Test (mean difference)</h2>
+<pre class="r"><code>#filter out characters that have both male and female customization options for play
+smash2 &lt;- smashdata %&gt;% filter(Gender != &quot;Selectable&quot;)
+
+#Mutate to categorize characters into male or not male
+smash2 &lt;- smash2 %&gt;% mutate(newgender = ifelse( Gender == &quot;Male&quot;, &quot;Male&quot;, &quot;Not&quot;))
+
+#randomization test
+meandiff &lt;- vector()
+for (i in 1:5000){
+  new &lt;- data.frame(sampgender = sample(smash2$newgender), weight = smash2$Weight)
+  meandiff[i] &lt;- mean(new[new$sampgender==&quot;Male&quot;,]$weight) - mean(new[new$sampgender==&quot;Not&quot;,]$weight)
+}
+
+#mean difference
+smash2 %&gt;% group_by(newgender) %&gt;% summarise(meanwt = mean(Weight)) %&gt;% summarize(diffmeans = diff(meanwt))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   diffmeans
+##       &lt;dbl&gt;
+## 1     -10.1</code></pre>
+<pre class="r"><code>#graph visualizing null distribution and test statistic
+{hist(meandiff,main=&quot;&quot;,ylab=&quot;&quot;); abline(v = c(-10.08, 10.08 ),col=&quot;red&quot;)}</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#calculate P-value
+mean(meandiff &gt; 10.08 | meandiff &lt; -10.08)</code></pre>
+<pre><code>## [1] 0.0034</code></pre>
+<p>A randomization test of mean difference was conducted. The null hypothesis is that the mean weights are the same for male vs non-male characters and the alternate hypothesis is that the two mean weights statistically differ. With a p-value of 0.0052 we can reject the null hypothesis and conclude that the two groups differ in weight.</p>
+</div>
+<div id="linear-regression" class="section level2">
+<h2>3. Linear Regression</h2>
+<pre class="r"><code>#new dataset for new part of project
+smash3 &lt;- smash2
+
+#center grab post stun values and air speed
+smash3$stun_c &lt;- smash3$grab.stun - mean(smash3$grab.stun, na.rm = T)
+
+#linear regression
+smashstuff &lt;- lm(air.speed ~ stun_c * type, data = smash3)
+summary(smashstuff) #note of adjusted r squared</code></pre>
+<pre><code>##
+## Call:
+## lm(formula = air.speed ~ stun_c * type, data = smash3)
+##
+## Residuals:
+## Min 1Q Median 3Q Max
+## -0.34951 -0.08549 0.00916 0.08141 0.26200
+##
+## Coefficients:
+## Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) 0.94576 0.05673 16.671 &lt;2e-16 ***
+## stun_c -0.01722 0.01967 -0.875 0.3846
+## typenew 0.08427 0.07399 1.139 0.2589
+## typeveteran 0.13871 0.06009 2.308 0.0242 *
+## stun_c:typenew 0.00825 0.02388 0.345 0.7309
+## stun_c:typeveteran 0.01680 0.02107 0.797 0.4281
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Residual standard error: 0.1438 on 65 degrees of freedom
+## Multiple R-squared: 0.09849, Adjusted R-squared: 0.02914
+## F-statistic: 1.42 on 5 and 65 DF, p-value: 0.2288</code></pre>
+<pre class="r"><code>#plot the regression
+ggplot(smash3, aes(air.speed, stun_c)) + geom_point(aes(color = type)) + geom_smooth(method = &quot;lm&quot;, aes(color = type))</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#check linearity through scatterplot
+plot(smash3$air.speed, smash3$stun_c)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#test normality using shapiro-wilk test
+resids &lt;- lm(air.speed ~ stun_c, data = smash3)$residuals
+shapiro.test(resids)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resids
+## W = 0.98551, p-value = 0.5888</code></pre>
+<pre class="r"><code>#check homoskedasticity using breuch-pagan test
+library(lmtest)
+bptest(smashstuff)</code></pre>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  smashstuff
+## BP = 6.4759, df = 5, p-value = 0.2626</code></pre>
+<pre class="r"><code>#robust standard errors
+library(sandwich)
+coeftest(smashstuff, vcov = vcovHC(smashstuff))</code></pre>
+<pre><code>##
+## t test of coefficients:
+##
+## Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) 0.9457603 0.1064823 8.8819 8e-13 ***
+## stun_c -0.0172193 0.0529781 -0.3250 0.7462
+## typenew 0.0842726 0.1172170 0.7189 0.4748
+## typeveteran 0.1387056 0.1087217 1.2758 0.2066
+## stun_c:typenew 0.0082499 0.0550530 0.1499 0.8813
+## stun_c:typeveteran 0.0167997 0.0539230 0.3116 0.7564
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<p>A DLC character with an average post grab stun would on average have an airspeed of 0.946. For every 1 increase in post grab stun from the average, the air speed on average would go down by 0.0172. New characters have an average air speed of 0.084 greater than DLC characters and veteran characters would have an average of 0.1387 greater air speed than DLC characters. 0.00825 is the estimated slope for stun_c on air speed for new characters and 0.0168 is the estimated slope for stun_c on air speed for veteran characters. Because the p-value of 0.59 surpasses 0.05 the data passes the shapiro-wilk test and therefore proves normality. The data also passed the Breusch-Pagan test with a p-value of 0.2626 proving homoskedasticity. However, the linearity assumptions seems to be violated because the scatterplot does not show a relationship between the variables. Before using robust standard errors the veteran group had a significant p-value but after using robust standards errors this value is no longer significant. The R-squared values show what proportion of the variation in the outcome your model explains, which is 0.02914.</p>
+</div>
+<div id="regression-model-with-interactionbootstrapped-se" class="section level2">
+<h2>4. Regression Model with Interaction/Bootstrapped SE</h2>
+<pre class="r"><code>#bootstrap by residuals
+
+#fit model
+fit4&lt;-lm(air.speed ~ stun_c*type,data=smash3)
+#save residuals
+resids&lt;-fit4$residuals
+#save yhats
+fitted&lt;-fit4$fitted.values
+
+resid_resamp&lt;-replicate(5000,{
+  new_resids&lt;-sample(resids,replace=TRUE) #resample resids w/ replacement 
+  smash3$new_y&lt;-fitted+new_resids #add new resids to yhats to get new &quot;data&quot; 
+  bsfit&lt;-lm(new_y~stun_c*type,data=smash3) #refit model
+  coef(bsfit) #save coefficient estimates (b0, b1, etc)
+})
+
+#SD
+resid_resamp%&gt;%t%&gt;%as.data.frame%&gt;%summarize_all(sd)</code></pre>
+<pre><code>## (Intercept) stun_c typenew typeveteran stun_c:typenew
+stun_c:typeveteran
+## 1 0.05402724 0.01885079 0.07045565 0.05697307 0.02268457
+0.02030431</code></pre>
+<p>Compared to the original standard errors (SE) the bootstrapped SEs very similar, just smaller by the slightest. This means the two sets of data would have similar p-values. However, the robust SEs almost double that of the bootstrapped SEs which also means the p-value would be different.</p>
+</div>
+<div id="logistic-regression-model" class="section level2">
+<h2>5. Logistic Regression Model</h2>
+<pre class="r"><code>#first create binary variable
+#chunk characters into weight categories, 1 means heavy weight, 0 means not
+smashtest &lt;- smashdata %&gt;% mutate(y = ifelse(Weight &gt; 100, 1, 0))
+#fit logistic regression model
+fitsmashtest &lt;- glm(y ~ Gender + Tier, data = smashtest, family = binomial(link = &quot;logit&quot;))
+summary(fitsmashtest)</code></pre>
+<pre><code>##
+## Call:
+## glm(formula = y ~ Gender + Tier, family = binomial(link
+= &quot;logit&quot;),
+## data = smashtest)
+##
+## Deviance Residuals:
+## Min 1Q Median 3Q Max
+## -1.6800 -0.7610 -0.3651 0.9537 1.7292
+##
+## Coefficients:
+## Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept) -2.62661 1.20122 -2.187 0.0288 *
+## GenderMale 1.48251 0.92622 1.601 0.1095
+## GenderNeutral 0.17874 1.25345 0.143 0.8866
+## GenderSelectable -0.44170 1.45027 -0.305 0.7607
+## TierB 1.38797 1.05036 1.321 0.1864
+## TierC 1.69610 0.99122 1.711 0.0871 .
+## TierD 0.05300 1.04675 0.051 0.9596
+## TierE 2.27585 1.05852 2.150 0.0316 *
+## TierF -16.13052 1903.63942 -0.008 0.9932
+## TierS -0.09712 1.38786 -0.070 0.9442
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## (Dispersion parameter for binomial family taken to be 1)
+##
+## Null deviance: 100.625 on 77 degrees of freedom
+## Residual deviance: 78.734 on 68 degrees of freedom
+## AIC: 98.734
+##
+## Number of Fisher Scoring iterations: 16</code></pre>
+<pre class="r"><code>#confusion table
+probability &lt;- predict(fitsmashtest, type = &quot;response&quot;)
+predicted &lt;- ifelse(probability &gt; 0.5, 1, 0)
+table(truth = smashtest$y, prediction = predicted) %&gt;% addmargins</code></pre>
+<pre><code>##      prediction
+## truth  0  1 Sum
+##   0   41 10  51
+##   1   11 16  27
+##   Sum 52 26  78</code></pre>
+<pre class="r"><code>#accuracy
+(41 + 16)/78</code></pre>
+<pre><code>## [1] 0.7307692</code></pre>
+<pre class="r"><code>#sensitivity
+16/26</code></pre>
+<pre><code>## [1] 0.6153846</code></pre>
+<pre class="r"><code>#specitivity
+41/52</code></pre>
+<pre><code>## [1] 0.7884615</code></pre>
+<pre class="r"><code>#precision
+16/27</code></pre>
+<pre><code>## [1] 0.5925926</code></pre>
+<pre class="r"><code>#density plot
+smashdensity &lt;- smashtest
+smashdensity$y &lt;- as.factor(smashdensity$y)
+smashdensity$logit&lt;-predict(fitsmashtest, type = &quot;link&quot;)
+smashdensity %&gt;% ggplot() + geom_density(aes(logit, color = y, fill = y), alpha = .3) + geom_vline(xintercept = 0) + xlab(&quot;logit values&quot;) + xlim(-5,5)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ROC plot
+library(plotROC)
+rocplot &lt;- ggplot(smashtest) + geom_roc(aes(d = y, m = probability), n.cuts = 0)
+rocplot</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#calculate AUC
+calc_auc(rocplot)</code></pre>
+<pre><code>##   PANEL group       AUC
+## 1     1    -1 0.7915759</code></pre>
+<p>Female characters who are in tier A have a log odds of -2.62661 of being a heavyweight character. In regard to genders, a character being male changes the log odds by 1.483, being neutral changes this by 0.179 and being selectable changes this by -0.442. Being in tier B, C, D, E, F, and S changes these log odds by 1.388, 1.696, 0.053, 2.275, -16.131, and 0.097 respectively. The accuracy, sensitivity, specitivity, and precision values are 0.731, 0.615, 0.788, and 0.593 respectively. The AUC of the ROC plot is 0.792 which is on the higher end of the &quot;fair&quot; range.</p>
+</div>
+<div id="logistic-regression-model-pt.2" class="section level2">
+<h2>6. Logistic Regression Model pt.2</h2>
+<pre class="r"><code>#take out repeated variables
+smashtest2 &lt;- smashtest %&gt;% select(Tier, grab.stun, grab.range, run.speed, walk.speed, air.speed, y, dash.speed, type, Gender)
+#fit model with all variables
+prob &lt;- glm(y ~ (.), data = smashtest2, family = &quot;binomial&quot;)
+
+#class diag function
+class_diag &lt;- function(probs,truth){
+#CONFUSION MATRIX: CALCULATE ACCURACY, TPR, TNR, PPV
+
+if(is.character(truth)==TRUE) truth&lt;-as.factor(truth)
+if(is.numeric(truth)==FALSE &amp; is.logical(truth)==FALSE) truth&lt;-as.numeric(truth)-1
+
+tab&lt;-table(factor(probs&gt;.5,levels=c(&quot;FALSE&quot;,&quot;TRUE&quot;)),factor(truth, levels=c(0,1)))
+acc=sum(diag(tab))/sum(tab)
+sens=tab[2,2]/colSums(tab)[2]
+spec=tab[1,1]/colSums(tab)[1]
+ppv=tab[2,2]/rowSums(tab)[2]
+f1=2*(sens*ppv)/(sens+ppv)
+
+#CALCULATE EXACT AUC
+ord&lt;-order(probs, decreasing=TRUE)
+probs &lt;- probs[ord]; truth &lt;- truth[ord]
+
+TPR=cumsum(truth)/max(1,sum(truth)) 
+FPR=cumsum(!truth)/max(1,sum(!truth))
+
+dup&lt;-c(probs[-1]&gt;=probs[-length(probs)], FALSE)
+TPR&lt;-c(0,TPR[!dup],1); FPR&lt;-c(0,FPR[!dup],1)
+n &lt;- length(TPR)
+auc&lt;- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+
+data.frame(acc,sens,spec,ppv,f1,auc)
+}
+
+#use function on data
+probs &lt;- predict(prob, type = &quot;response&quot;)
+class_diag(probs, smashtest2$y)</code></pre>
+<pre><code>##         acc      sens      spec       ppv  f1       auc
+## 1 0.8589744 0.8148148 0.8823529 0.7857143 0.8 0.9259259</code></pre>
+<pre class="r"><code>#perform 10-fold
+set.seed(1234)
+k = 10
+
+data1&lt;-smashtest2[sample(nrow(smashtest2)),] #put dataset in random order
+folds&lt;-cut(seq(1:nrow(smashtest2)),breaks=k,labels=F) #create folds
+
+diags&lt;-NULL
+for(i in 1:k){          # FOR EACH OF 10 FOLDS
+  train&lt;-data1[folds!=i,] # CREATE TRAINING SET
+  test&lt;-data1[folds==i,]  # CREATE TESTING SET
+  
+  truth&lt;-test$y
+  
+  fit&lt;- glm(y ~ (.), data = train, family=&quot;binomial&quot;)
+  probs&lt;- predict(fit, newdata = test, type=&quot;response&quot;)
+  
+  diags&lt;-rbind(diags,class_diag(probs,truth)) #CV DIAGNOSTICS FOR EACH FOLD
+}
+
+summarize_all(diags,mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS</code></pre>
+<pre><code>##         acc sens      spec       ppv  f1       auc
+## 1 0.7464286  NaN 0.8270238 0.6416667 NaN 0.7083333</code></pre>
+<pre class="r"><code>#perform LASSO
+library(glmnet)
+set.seed(1234)
+
+response = as.matrix(smashtest2$y)
+#predictor variable matrix, drop first column
+smash_preds = model.matrix(y ~ ., data = smashtest2)[, -1]
+#cross validation
+cv &lt;- cv.glmnet(smash_preds, response, family = &quot;binomial&quot;)
+lasso_fit &lt;- glmnet(smash_preds, response, family = &quot;binomial&quot;, lambda = cv$lambda.1se)
+head(lasso_fit)</code></pre>
+<pre><code>## $a0
+##           s0 
+## 0.0009324011 
+## 
+## $beta
+## 17 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                          s0
+## TierB             .        
+## TierC             .        
+## TierD             .        
+## TierE             .        
+## TierF             .        
+## TierS             .        
+## grab.stun         .        
+## grab.range        .        
+## run.speed         .        
+## walk.speed       -0.4258594
+## air.speed         .        
+## dash.speed        .        
+## typenew           .        
+## typeveteran      -0.2231894
+## GenderMale        .        
+## GenderNeutral     .        
+## GenderSelectable  .        
+## 
+## $df
+## [1] 2
+## 
+## $dim
+## [1] 17  1
+## 
+## $lambda
+## [1] 0.1344729
+## 
+## $dev.ratio
+## [1] 0.04254539</code></pre>
+<pre class="r"><code>#create dataset with only lasso variables.
+smashtest3 &lt;- smashtest2 %&gt;% mutate(veteran = ifelse(type == &quot;veteran&quot;, 1, 0)) %&gt;% select(y, walk.speed, veteran)
+#set data up for 10-fold
+data1&lt;-smashtest3[sample(nrow(smashtest3)),] #put dataset in random order
+folds&lt;-cut(seq(1:nrow(smashtest3)),breaks=k,labels=F) #create folds
+
+#10 fold with lasso variables only
+diags&lt;-NULL
+for(i in 1:k){          # FOR EACH OF 10 FOLDS
+  train&lt;-data1[folds!=i,] # CREATE TRAINING SET
+  test&lt;-data1[folds==i,]  # CREATE TESTING SET
+  
+  truth&lt;-test$y
+  
+  fit&lt;- glm(y ~ (.), data = train, family=&quot;binomial&quot;)
+  probs&lt;- predict(fit, newdata = test, type=&quot;response&quot;)
+  
+  diags&lt;-rbind(diags,class_diag(probs,truth)) #CV DIAGNOSTICS FOR EACH FOLD
+}
+
+summarize_all(diags,mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS</code></pre>
+<pre><code>##         acc sens     spec ppv  f1      auc
+## 1 0.7214286 0.44 0.867381 NaN NaN 0.776875</code></pre>
+<p>With the first logistic regression the accuracy, sensitivity, specitivity, precision, and AUC values are 0.859, 0.814, 0.882, 0.786, and 0.926 respecively. These are pretty good values, and an AUC of 0.926 is classified as great! After a 10-fold CV is performed the accuracty, sensitivity, specitivity, precision, and AUC values are 0.746, NA, 0.827, 0.642, and 0.70833 respecively. All of these values are smaller than the in-sample classification diagnostics. The decrease in AUC shows signs of over-fitting. After LASSO was performed the only non-zero coefficients are walk speed and type veteran. Using a 10-fold of only LASSO variables the AUC is 0.777, which is lower than the in-sample classification but higher than the 10-fold CV before LASSO was conducted.</p>
+<pre class="r"><code>data(package = .packages(all.available = TRUE))</code></pre>
+<p>...</p>
+</div>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

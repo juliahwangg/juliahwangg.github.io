@@ -1,0 +1,331 @@
+---
+title: 'Project 2: Modeling, Testing, and Predicting'
+author: "SDS348"
+date: ''
+output:
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE,fig.align="center",warning=FALSE,message=FALSE,fig.width=8, fig.height=5, linewidth=60)
+options(tibble.width = 100,width = 100)
+library(tidyverse)
+```
+
+## 0. Introduction
+
+####Ever since I purchased a Nitendo Switch a few years ago, I have been playing Super Smash Bro's Ultimate regularly. Each character in the game has their own combination of skills and characteristics. Every time a new Smash game is released, there is a tier list that is compiled based off of tournament winnings and rankings by those who play professionally. The tier rankings change with every version of the game due to new characters being introduced and upgrades in the game itself.
+
+####My dataset contains numeric and categorical variables of 78 characters. It contains each character's weight, air speed, walking speed, running speed, dashing speed, grab range, and grab post-shieldstun. When playing against an opponent who is shielding, the only way to attack the opponent is by grabbing them, and a longer grabbing range is more benificial. Also, a player cannot grab his opponent while shilding himself. The shield must be broken first before grabbing, and there is some lag between these two actions. The grab post-shield variable is the number of dataframes this lag is. A longer time between shielding and grabbing is not benificial as it leaves the player in a vulnerable state to be attacked. The dataset also contains the gender, type, and tier of the characters. In the "Type" column, veteran characters are those that were a part of the original game, new characters are those that were introduced in the latest version, and DLC characters are the newest additions that players pay money to download into their console. The tiers ranked from highest to lowest is as follows: S, A, B, C, D, E, and F. In regard to gender, "selectable" characters mean the character has both male and female options for play. Neutral characters are characterized as 50/50 of male/female or the gender is ambiguous. 
+
+####I expect that on average male characters will be heavier than female and neutral characters. In regard to numeric variables I would assume that the greatest differences would be between veteran characters and new/DLC characters. Because DLC characters are those the player must purchase with real money, I would assume DLC characters would be the most different from veteran characters, as no one would pay money only to download a mediocre character. I believe that heavy weight characters have a disadvantage when in play (especially with professionals), so I expect to see significant differences in many numeric and categorical variables when comparing heavy weight characters to those that are not.
+
+```{r}
+#load packages
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(readxl)
+
+#import datasets
+characterstats <- read_excel("character stats.xlsx")
+categoricalstats <- read_excel("more smash data.xlsx")
+
+#join data
+smashdata <- full_join(characterstats, categoricalstats)
+
+#rename columns
+smashdata <- smashdata %>% rename(air.speed = "Air Speed")
+smashdata <- smashdata %>% rename(walk.speed = "Walk Speed")
+smashdata <- smashdata %>% rename(dash.speed = "Dash Speed")
+smashdata <- smashdata %>% rename(run.speed = "Run speed")
+smashdata <- smashdata %>% rename(grab.range = "Grab Range")
+smashdata <- smashdata %>% rename(grab.stun = "Grab, Shieldstun")
+```
+
+
+## 1. MANOVA/ANOVA/Post-hoc/type 1 error/bonferroni correction 
+
+```{r}
+
+#MANOVA assumptions
+library(rstatix)
+
+group <- smashdata$type
+DVs <- smashdata %>% select(Weight, air.speed, walk.speed, run.speed, grab.range, grab.stun)
+
+#Test multivariate normality for each group (null: assumption met)
+#If any p<.05, stop.
+sapply(split(DVs,group), mshapiro_test)
+
+#manova test for mean difference across type of character
+man1 <- manova(cbind(Weight, air.speed, walk.speed, dash.speed, run.speed, grab.range, grab.stun) ~ type, data = smashdata)
+summary(man1)
+
+# 7 anova tests
+summary.aov(man1)
+
+#6 pairwise t (post-hoc)
+pairwise.t.test(smashdata$Weight, smashdata$type, p.adj = "none")
+pairwise.t.test(smashdata$dash.speed, smashdata$type, p.adj = "none")
+
+#bonferroni correction
+.05/(1+7+6)
+
+#type 1 error
+1-.95^14
+
+```
+For the MANOVA assumptions test the p-value for veteran was much less than 0.05, meaning we reject the null hypothesis that all population variances/covariances are equal across groups. Either way, proceeding with the manova test, it showed a significant p-value meaning there is at least one significant difference of the numerical variables across 2 or more of the groups. The anova tests showed more specific statistics in that weight and dash speed were significantly different among two or more of the groups. Using an alpha value of 0.05, the pairwise t-tests showed that weight differed between veteran vs. new characters and dash speed differed between veteran vs. DLC and veteran vs. new characters. With 14 tests conducted, the bonferroni correction would make the p-value 0.0036. Using this value would make none of the pairwise t-tests significant between any groups. The probability of a type 1 error is 0.5123. 
+
+##2. Randomization Test (mean difference)
+```{r}
+#filter out characters that have both male and female customization options for play
+smash2 <- smashdata %>% filter(Gender != "Selectable")
+
+#Mutate to categorize characters into male or not male
+smash2 <- smash2 %>% mutate(newgender = ifelse( Gender == "Male", "Male", "Not"))
+
+#randomization test
+meandiff <- vector()
+for (i in 1:5000){
+  new <- data.frame(sampgender = sample(smash2$newgender), weight = smash2$Weight)
+  meandiff[i] <- mean(new[new$sampgender=="Male",]$weight) - mean(new[new$sampgender=="Not",]$weight)
+}
+
+#mean difference
+smash2 %>% group_by(newgender) %>% summarise(meanwt = mean(Weight)) %>% summarize(diffmeans = diff(meanwt))
+#graph visualizing null distribution and test statistic
+{hist(meandiff,main="",ylab=""); abline(v = c(-10.08, 10.08	),col="red")}
+#calculate P-value
+mean(meandiff > 10.08 | meandiff < -10.08)
+```
+A randomization test of mean difference was conducted. The null hypothesis is that the mean weights are the same for male vs non-male characters and the alternate hypothesis is that the two mean weights statistically differ. With a p-value of 0.0052 we can reject the null hypothesis and conclude that the two groups differ in weight. 
+
+
+##3. Linear Regression
+
+```{r}
+#new dataset for new part of project
+smash3 <- smash2
+
+#center grab post stun values and air speed
+smash3$stun_c <- smash3$grab.stun - mean(smash3$grab.stun, na.rm = T)
+
+#linear regression
+smashstuff <- lm(air.speed ~ stun_c * type, data = smash3)
+summary(smashstuff) #note of adjusted r squared
+
+#plot the regression
+ggplot(smash3, aes(air.speed, stun_c)) + geom_point(aes(color = type)) + geom_smooth(method = "lm", aes(color = type))
+
+#check linearity through scatterplot
+plot(smash3$air.speed, smash3$stun_c)
+
+#test normality using shapiro-wilk test
+resids <- lm(air.speed ~ stun_c, data = smash3)$residuals
+shapiro.test(resids)
+
+#check homoskedasticity using breuch-pagan test
+library(lmtest)
+bptest(smashstuff)
+
+#robust standard errors
+library(sandwich)
+coeftest(smashstuff, vcov = vcovHC(smashstuff))
+```
+A DLC character with an average post grab stun would on average have an airspeed of 0.946. For every 1 increase in post grab stun from the average, the air speed on average would go down by 0.0172. New characters have an average air speed of 0.084 greater than DLC characters and veteran characters would have an average of 0.1387 greater air speed than DLC characters. 0.00825 is the estimated slope for stun_c on air speed for new characters and 0.0168 is the estimated slope for stun_c on air speed for veteran characters. Because the p-value of 0.59 surpasses 0.05 the data passes the shapiro-wilk test and therefore proves normality. The data also passed the Breusch-Pagan test with a p-value of 0.2626 proving homoskedasticity. However, the linearity assumptions seems to be violated because the scatterplot does not show a relationship between the variables. Before using robust standard errors the veteran group had a significant p-value but after using robust standards errors this value is no longer significant. The R-squared values show what proportion of the variation in the outcome your model explains, which is 0.02914.
+
+##4. Regression Model with Interaction/Bootstrapped SE
+
+```{r}
+#bootstrap by residuals
+
+#fit model
+fit4<-lm(air.speed ~ stun_c*type,data=smash3)
+#save residuals
+resids<-fit4$residuals
+#save yhats
+fitted<-fit4$fitted.values
+
+resid_resamp<-replicate(5000,{
+  new_resids<-sample(resids,replace=TRUE) #resample resids w/ replacement 
+  smash3$new_y<-fitted+new_resids #add new resids to yhats to get new "data" 
+  bsfit<-lm(new_y~stun_c*type,data=smash3) #refit model
+  coef(bsfit) #save coefficient estimates (b0, b1, etc)
+})
+
+#SD
+resid_resamp%>%t%>%as.data.frame%>%summarize_all(sd)
+```
+Compared to the original standard errors (SE) the bootstrapped SEs very similar, just smaller by the slightest. This means the two sets of data would have similar p-values. However, the robust SEs almost double that of the bootstrapped SEs which also means the p-value would be different.
+
+##5. Logistic Regression Model
+
+```{r}
+#first create binary variable
+#chunk characters into weight categories, 1 means heavy weight, 0 means not
+smashtest <- smashdata %>% mutate(y = ifelse(Weight > 100, 1, 0))
+#fit logistic regression model
+fitsmashtest <- glm(y ~ Gender + Tier, data = smashtest, family = binomial(link = "logit"))
+summary(fitsmashtest)
+
+#confusion table
+probability <- predict(fitsmashtest, type = "response")
+predicted <- ifelse(probability > 0.5, 1, 0)
+table(truth = smashtest$y, prediction = predicted) %>% addmargins
+
+#accuracy
+(41 + 16)/78
+
+#sensitivity
+16/26
+
+#specitivity
+41/52
+
+#precision
+16/27
+
+#density plot
+smashdensity <- smashtest
+smashdensity$y <- as.factor(smashdensity$y)
+smashdensity$logit<-predict(fitsmashtest, type = "link")
+smashdensity %>% ggplot() + geom_density(aes(logit, color = y, fill = y), alpha = .3) + geom_vline(xintercept = 0) + xlab("logit values") + xlim(-5,5)
+
+#ROC plot
+library(plotROC)
+rocplot <- ggplot(smashtest) + geom_roc(aes(d = y, m = probability), n.cuts = 0)
+rocplot
+
+#calculate AUC
+calc_auc(rocplot)
+```
+Female characters who are in tier A have a log odds of -2.62661 of being a heavyweight character. In regard to genders, a character being male changes the log odds by 1.483, being neutral changes this by 0.179 and being selectable changes this by -0.442. Being in tier B, C, D, E, F, and S changes these log odds by 1.388, 1.696, 0.053, 2.275, -16.131, and 0.097 respectively. The accuracy, sensitivity, specitivity, and precision values are 0.731, 0.615, 0.788, and 0.593 respectively. The AUC of the ROC plot is 0.792 which is on the higher end of the "fair" range. 
+
+##6. Logistic Regression Model pt.2
+
+```{r}
+#take out repeated variables
+smashtest2 <- smashtest %>% select(Tier, grab.stun, grab.range, run.speed, walk.speed, air.speed, y, dash.speed, type, Gender)
+#fit model with all variables
+prob <- glm(y ~ (.), data = smashtest2, family = "binomial")
+
+#class diag function
+class_diag <- function(probs,truth){
+#CONFUSION MATRIX: CALCULATE ACCURACY, TPR, TNR, PPV
+
+if(is.character(truth)==TRUE) truth<-as.factor(truth)
+if(is.numeric(truth)==FALSE & is.logical(truth)==FALSE) truth<-as.numeric(truth)-1
+
+tab<-table(factor(probs>.5,levels=c("FALSE","TRUE")),factor(truth, levels=c(0,1)))
+acc=sum(diag(tab))/sum(tab)
+sens=tab[2,2]/colSums(tab)[2]
+spec=tab[1,1]/colSums(tab)[1]
+ppv=tab[2,2]/rowSums(tab)[2]
+f1=2*(sens*ppv)/(sens+ppv)
+
+#CALCULATE EXACT AUC
+ord<-order(probs, decreasing=TRUE)
+probs <- probs[ord]; truth <- truth[ord]
+
+TPR=cumsum(truth)/max(1,sum(truth)) 
+FPR=cumsum(!truth)/max(1,sum(!truth))
+
+dup<-c(probs[-1]>=probs[-length(probs)], FALSE)
+TPR<-c(0,TPR[!dup],1); FPR<-c(0,FPR[!dup],1)
+n <- length(TPR)
+auc<- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+
+data.frame(acc,sens,spec,ppv,f1,auc)
+}
+
+#use function on data
+probs <- predict(prob, type = "response")
+class_diag(probs, smashtest2$y)
+
+#perform 10-fold
+set.seed(1234)
+k = 10
+
+data1<-smashtest2[sample(nrow(smashtest2)),] #put dataset in random order
+folds<-cut(seq(1:nrow(smashtest2)),breaks=k,labels=F) #create folds
+
+diags<-NULL
+for(i in 1:k){          # FOR EACH OF 10 FOLDS
+  train<-data1[folds!=i,] # CREATE TRAINING SET
+  test<-data1[folds==i,]  # CREATE TESTING SET
+  
+  truth<-test$y
+  
+  fit<- glm(y ~ (.), data = train, family="binomial")
+  probs<- predict(fit, newdata = test, type="response")
+  
+  diags<-rbind(diags,class_diag(probs,truth)) #CV DIAGNOSTICS FOR EACH FOLD
+}
+
+summarize_all(diags,mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS
+
+#perform LASSO
+library(glmnet)
+set.seed(1234)
+
+response = as.matrix(smashtest2$y)
+#predictor variable matrix, drop first column
+smash_preds = model.matrix(y ~ ., data = smashtest2)[, -1]
+#cross validation
+cv <- cv.glmnet(smash_preds, response, family = "binomial")
+lasso_fit <- glmnet(smash_preds, response, family = "binomial", lambda = cv$lambda.1se)
+head(lasso_fit)
+
+#create dataset with only lasso variables.
+smashtest3 <- smashtest2 %>% mutate(veteran = ifelse(type == "veteran", 1, 0)) %>% select(y, walk.speed, veteran)
+#set data up for 10-fold
+data1<-smashtest3[sample(nrow(smashtest3)),] #put dataset in random order
+folds<-cut(seq(1:nrow(smashtest3)),breaks=k,labels=F) #create folds
+
+#10 fold with lasso variables only
+diags<-NULL
+for(i in 1:k){          # FOR EACH OF 10 FOLDS
+  train<-data1[folds!=i,] # CREATE TRAINING SET
+  test<-data1[folds==i,]  # CREATE TESTING SET
+  
+  truth<-test$y
+  
+  fit<- glm(y ~ (.), data = train, family="binomial")
+  probs<- predict(fit, newdata = test, type="response")
+  
+  diags<-rbind(diags,class_diag(probs,truth)) #CV DIAGNOSTICS FOR EACH FOLD
+}
+
+summarize_all(diags,mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS
+```
+With the first logistic regression the accuracy, sensitivity, specitivity, precision, and AUC values are 0.859, 0.814, 0.882, 0.786, and 0.926 respecively. These are pretty good values, and an AUC of 0.926 is classified as great! After a 10-fold CV is performed the accuracty, sensitivity, specitivity, precision, and AUC values are 0.746, NA, 0.827, 0.642, and 0.70833 respecively. All of these values are smaller than the in-sample classification diagnostics. The decrease in AUC shows signs of over-fitting. After LASSO was performed the only non-zero coefficients are walk speed and type veteran. Using a 10-fold of only LASSO variables the AUC is 0.777, which is lower than the in-sample classification but higher than the 10-fold CV before LASSO was conducted.
+
+```{R eval=F}
+data(package = .packages(all.available = TRUE))
+```
+
+...
+
+
+
+
+

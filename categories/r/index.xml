@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Julia&#39;s Final Project!</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on Julia&#39;s Final Project!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 03 Dec 2020 21:13:14 -0500</lastBuildDate><atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monty Hall Problem and Some Reticulate</title>
+      <link>/post/2020/12/03/monty-hall-problem-and-some-reticulate/</link>
+      <pubDate>Thu, 03 Dec 2020 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2020/12/03/monty-hall-problem-and-some-reticulate/</guid>
+      <description>Let&#39;s talk about python ! To look at some python functions, Let&#39;s do something fun. In the beginning of the semester my professor, Dr. Woodward, talked about the Monty Hall problem. This is a fairly popular dilemma. If you are completely unfamiliar with the problem Google will probably give a better explanation, but if you just need a refresher I&#39;ll do a quick synopsis.  Let&#39;s say in a game show there are three doors.</description>
+    </item>
+    
+  </channel>
+</rss>

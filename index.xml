@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Julia&#39;s Final Project!</title>
+    <link>/</link>
+    <description>Recent content on Julia&#39;s Final Project!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 03 Dec 2020 21:13:14 -0500</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monty Hall Problem and Some Reticulate</title>
+      <link>/post/2020/12/03/monty-hall-problem-and-some-reticulate/</link>
+      <pubDate>Thu, 03 Dec 2020 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2020/12/03/monty-hall-problem-and-some-reticulate/</guid>
+      <description>Let&#39;s talk about python ! To look at some python functions, Let&#39;s do something fun. In the beginning of the semester my professor, Dr. Woodward, talked about the Monty Hall problem. This is a fairly popular dilemma. If you are completely unfamiliar with the problem Google will probably give a better explanation, but if you just need a refresher I&#39;ll do a quick synopsis.  Let&#39;s say in a game show there are three doors.</description>
+    </item>
+    
+    <item>
+      <title>Project 1: Exploratory Data Analysis</title>
+      <link>/project/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project1/</guid>
+      <description>0. Introduction The datasets I will be using for this project come from three sources: my credit card statements, my fitness app, and my PDM (insulin delivery device). I am computing to see if there is a correlation between my food spending habits, my weight, and how much insulin I am using. My credit card data contains every transaction on my card from the past year.</description>
+    </item>
+    
+    <item>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project2/</guid>
+      <description>0. Introduction Ever since I purchased a Nitendo Switch a few years ago, I have been playing Super Smash Bro&#39;s Ultimate regularly. Each character in the game has their own combination of skills and characteristics. Every time a new Smash game is released, there is a tier list that is compiled based off of tournament winnings and rankings by those who play professionally. The tier rankings change with every version of the game due to new characters being introduced and upgrades in the game itself.</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/</guid>
+      <description>  Check out some of my coding projects below:
+ Wrangling &amp;amp; Exploratory Data Analysis
+ Modeling, Inference, Prediction
+  -- </description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>   </description>
+    </item>
+    
+  </channel>
+</rss>
