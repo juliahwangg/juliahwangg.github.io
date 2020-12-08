@@ -14,6 +14,8 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 ###To look at some python functions, Let's do something fun. In the beginning of the semester my professor, Dr. Woodward, talked about the Monty Hall problem. This is a fairly popular dilemma. If you are completely unfamiliar with the problem Google will probably give a better explanation, but if you just need a refresher I'll do a quick synopsis. 
 
+![](/post/2015-07-23-r-rmarkdown_files/montyhall.png){width=70%}
+
 ###Let's say in a game show there are three doors. Behind two of the doors are dog poop and behind one of the doors contains a new Tesla. Of course, you dont know which door contains the Tesla, but the game show host does. So now the host asks you to choose a door to open and let's say you choose door #1. However, the host opens door #3 instead, revealing dog poop. Then he asks if you would like to change your pick to door #2. Should you switch your choice?
 
 ###Many people assume it shouldn't matter and believe that well, if there are two doors left, shouldn't it be a 50/50 chance of getting poop or a new tesla? The answer actually is no. You SHOULD in fact switch doors. 
